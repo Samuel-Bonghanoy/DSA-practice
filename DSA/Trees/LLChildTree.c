@@ -49,8 +49,14 @@ node Right_Sibling(node N, TREE T) {
 }
 
 
-label Label(node N, TREE T);
-node Root(TREE T);
+label Label(node N, TREE T){
+    return T.Header[N] == NULL ? -1 : N;
+}
+
+node Root(TREE T) {
+    return T.root;
+}
+
 
 void Initialize(TREE *T){
     int x;
