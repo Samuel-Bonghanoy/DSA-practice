@@ -6,6 +6,7 @@
 
 // * MACROS HERE
 #define MAX 20
+#define DNE -100
 
 // * TYPE DEFINITIONS HERE
 

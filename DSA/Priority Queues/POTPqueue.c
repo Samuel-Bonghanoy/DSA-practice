@@ -13,15 +13,26 @@ void Insert(int elem, pQueue *q){
 }
 
 void Display(pQueue q){
-    int x;
-    for(x = 0; x <= q.lastIndex; x++) {
-        printf("%d", q.heap[x]);
+    int x, y;
+    for(x = 0; x < q.lastIndex; x++){
+       printf("[%d] =>", q.heap[x]);
+
+       if(q.heap[(x * 2) + 1] != DNE && (x * 2) + 1 < MAX ) {
+           printf("%d => ", q.heap[(x * 2) + 1]);
+           printf("%d", q.heap[(x * 2) + 2]);       
+        }
+
+       printf("\n");
     }
 }
 
 void DeleteMin(pQueue *q);
 
 void Initialize(pQueue *q) {
+    int x;
+    for(x = 0; x < MAX; x++) {
+        q->heap[x] = DNE;
+    }
     q->lastIndex = -1;
 }
 
