@@ -79,9 +79,9 @@ void MakeNULL(TREE *T) {
 }
 
 void Insert(node N, TREE *T, int key) {
-        Nodetype newNode = (Nodetype)malloc(sizeof(Nodetype));
-        newNode->key = key;
-        newNode->link = NULL;
+    Nodetype newNode = (Nodetype)malloc(sizeof(Nodetype));
+    newNode->key = key;
+    newNode->link = NULL;
     if(T->Header[N] == NULL) {
         T->Header[N] = newNode;
     } else {
