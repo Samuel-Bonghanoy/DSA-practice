@@ -13,7 +13,7 @@ void Insert(int elem, pQueue *q){
 
 void Display(pQueue q){
     int x;
-    for(x = 0; x < q.lastIndex; x++) {
+    for(x = 0; x <= q.lastIndex; x++) {
         printf("%d=>", q.heap[x]);
     }
 }
@@ -27,6 +27,14 @@ void Initialize(pQueue *q) {
 void MakeNull(pQueue *q);
 
 int main(void) 
-{
+{   
+    pQueue q;
+    Initialize(&q);
+    Insert(3, &q);
+    Insert(10, &q);
+    Insert(2, &q);
+    Insert(39, &q);
+    Insert(9, &q);
+    Display(q);
     return 0;
 }

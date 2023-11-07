@@ -1,10 +1,14 @@
 #ifndef DATASTRUCTURE_IMPLEMENTATIONNAME
 #define DATASTRUCTURE_IMPLEMENTATIONNAME
 
+#include <stdio.h>
+#include <stdlib.h>
+
 // * MACROS HERE
 #define MAX 20
 
 // * TYPE DEFINITIONS HERE
+
  
 typedef struct {
 	int heap[MAX];
