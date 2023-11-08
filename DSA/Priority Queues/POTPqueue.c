@@ -8,14 +8,13 @@ void swap(int *a, int *b) {
 }
 
 void Insert(int elem, pQueue *q){
-    int x, temp, index = ++q->lastIndex;
-    q->heap[index] = elem;
-    while(q->heap[index] < q->heap[(index - 1)/2]){
-        temp = q->heap[(index - 1)/2];
-        q->heap[(index - 1)/2] = q->heap[index];
-        q->heap[index] = temp;
-        index = (index - 1)/2;
-    }
+  int temp, index;
+  q->heap[++q->lastIndex] = elem;
+  for(index = q->lastIndex; q->heap[index] < q->heap[(index-1)/2]; index = (index - 1)/2){
+    temp = q->heap[index];
+    q->heap[index] = q->heap[(index-1)/2];
+    q->heap[(index-1)/2] = temp;
+  }
 }
 
 void Display(pQueue q){
@@ -23,9 +22,9 @@ void Display(pQueue q){
     for(x = 0; x <= q.lastIndex; x++){
        printf("[%d] => ", q.heap[x]);
 
-       if(q.heap[(x * 2) + 1] != DNE && (x * 2) + 1 < MAX ) {
+       if(LeftChild(x) <= q.lastIndex) {
            printf("%d => ", q.heap[(x * 2) + 1]);
-           if(q.heap[(x * 2) + 2] != DNE) printf("%d", q.heap[(x * 2) + 2]);       
+           if(RightChild(x) <= q.lastIndex) printf("%d", q.heap[(x * 2) + 2]);       
         }
 
        printf("\n");
@@ -51,15 +50,18 @@ void DeleteMin(pQueue *q) {
     int temp, index = 0;
     q->heap[index] = q->heap[q->lastIndex];
     q->heap[q->lastIndex--] = DNE;
-    while((index * 2) + 1 < q->lastIndex && (q->heap[index] > q->heap[LeftChild(index)] || q->heap[index] > q->heap[RightChild(index)])) {
-        int smallestChild = SmallestChild(*q, index), left = LeftChild(index), right = RightChild(index);
-        if(smallestChild == left){
-            swap(&(q->heap[index]), &(q->heap[left]));
+    while(q->heap[index] > SmallestChild(*q, index) && (index *2) + 1 < q->lastIndex) {
+        int left = LeftChild(index), right = RightChild(index), temp = q->heap[index];
+
+        if(SmallestChild(*q, index) == left) {
+            q->heap[index] = q->heap[left];
+            q->heap[left] = temp;
             index = (index * 2) + 1;
         }
 
-        if(smallestChild == right){
-            swap(&(q->heap[index]), &(q->heap[right]));
+        if(SmallestChild(*q, index) == right) {
+            q->heap[index] = q->heap[right];
+            q->heap[right] = temp;
             index = (index * 2) + 2;
         }
     }
@@ -102,3 +104,20 @@ int main(void)
     Display(q);
     return 0;
 }
+
+// int temp, index = 0;
+//     q->heap[index] = q->heap[q->lastIndex];
+//     q->heap[q->lastIndex--] = DNE;
+//     while((index * 2) + 1 < q->lastIndex && (q->heap[index] > q->heap[LeftChild(index)] || q->heap[index] > q->heap[RightChild(index)])) {
+//         int smallestChild = SmallestChild(*q, index), left = LeftChild(index), right = RightChild(index);
+//         if(smallestChild == left){
+//             swap(&(q->heap[index]), &(q->heap[left]));
+//             index = (index * 2) + 1;
+//         }
+
+//         if(smallestChild == right){
+//             swap(&(q->heap[index]), &(q->heap[right]));
+//             index = (index * 2) + 2;
+//         }
+//     }
+    
