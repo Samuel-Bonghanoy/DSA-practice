@@ -19,6 +19,8 @@ typedef struct {
 // * OPERATIONS HERE
 void swap(int *a, int *b);
 
+void Heapify(pQueue *q, int index);
+
 void Insert(int elem, pQueue *q);
 
 void Display(pQueue q);
@@ -29,7 +31,7 @@ int RightChild(int index);
 
 int SmallestChild(pQueue q, int index);
 
-void DeleteMin(pQueue *q);
+int DeleteMin(pQueue *q);
 
 void Initialize(pQueue *q);
 
