@@ -118,7 +118,7 @@ void MakeNull(pQueue *q){
 void heapsort(int *arr, int size) {
     pQueue q;
     Initialize(&q);
-    int x, y;
+    int x;
     for(x = 0; x < size; x++) {
         Insert(arr[x], &q);
     }
