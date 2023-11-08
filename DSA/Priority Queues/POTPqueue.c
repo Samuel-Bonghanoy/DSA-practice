@@ -29,9 +29,7 @@ void Display(pQueue q){
         }
 
        printf("\n");
-    } {
-
-    }
+    } 
 }
 
 int LeftChild(int index) {
@@ -76,7 +74,12 @@ void Initialize(pQueue *q) {
     q->lastIndex = -1;
 }
 
-void MakeNull(pQueue *q);
+void MakeNull(pQueue *q){
+    int x;
+    for(x = 0; x <= q->lastIndex; x++){
+        q->heap[x] = DNE;
+    }
+}
 
 int main(void) 
 {   
