@@ -1,6 +1,12 @@
 #include "_header.h"
 
 // * FUNCTION DEFINITIONS HERE
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 void Insert(int elem, pQueue *q){
     int x, temp, index = ++q->lastIndex;
     q->heap[index] = elem;
@@ -23,10 +29,36 @@ void Display(pQueue q){
         }
 
        printf("\n");
+    } {
+
     }
 }
 
-void DeleteMin(pQueue *q);
+int LeftChild(int index) {
+    return (index * 2) + 1;
+}
+
+int RightChild(int index) {
+    return (index * 2) + 2;
+}
+
+int SmallestChild(pQueue q, int index) {
+    int left = LeftChild(index); 
+    int right = RightChild(index);
+
+    return q.heap[left] < q.heap[right] ? left : right;
+}
+
+void DeleteMin(pQueue *q) {
+    int temp, index = 0, left = LeftChild(index), right = RightChild(index);
+    q->heap[index] = q->heap[q->lastIndex--];
+    while(q->heap[index] > q->heap[left] || q->heap[index] > q->heap[right]) {
+        if(SmallestChild(*q, index) == left){
+
+        }
+    }
+    
+}
 
 void Initialize(pQueue *q) {
     int x;

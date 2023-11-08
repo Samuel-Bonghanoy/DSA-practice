@@ -17,8 +17,12 @@ typedef struct {
 }pQueue;
 
 // * OPERATIONS HERE
+void swap(int *a, int *b);
 void Insert(int elem, pQueue *q);
 void Display(pQueue q);
+int LeftChild(int index);
+int RightChild(int index);
+int SmallestChild(pQueue q, int index);
 void DeleteMin(pQueue *q);
 void Initialize(pQueue *q);
 void MakeNull(pQueue *q);
