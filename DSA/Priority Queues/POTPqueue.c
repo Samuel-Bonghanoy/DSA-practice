@@ -128,6 +128,36 @@ void heapsort(int *arr, int size) {
     }
 }
 
+void heapifyArr(int *arr, int size, int index) {
+    int smallest = index;
+    int leftChild = 2 * index + 1;
+    int rightChild = 2 * index + 2;
+
+    if (leftChild < size && arr[leftChild] > arr[smallest]) {
+      smallest = leftChild;
+    }
+
+    if (rightChild < size && arr[rightChild] > arr[smallest]) {
+      smallest = rightChild;
+    }
+
+    if (smallest != index) {
+      swap(&arr[index], &arr[smallest]);
+      heapifyArr(arr, size, smallest);
+    }
+}
+
+void heapsort2(int *arr, int size){
+    int x;
+    for (x = size / 2 - 1; x >= 0; x--) {
+    heapify(arr, size, x);
+  }
+
+    for(x = 0; x < size; x++) {
+        heapifyArr(arr, size, x);
+    }
+}
+
 int main(void) 
 {   
     int arr [9]= {9,2,18,23,5,1,8,27,7};
@@ -153,7 +183,7 @@ int main(void)
     // // DeleteMin(&q);
     // // DeleteMin(&q);
     // Display(q);
-    heapsort(arr, 9);
+    heapsort2(arr, 9);
     for(int x = 0; x < 9; x ++) {
         printf("%d ", arr[x]);
     }
