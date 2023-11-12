@@ -94,10 +94,12 @@ int search(LIST head, int data) {
 void deleteAllOccurences(LIST *head, int elem) {
     LIST *trav, temp;
 
-    for(trav = head; *trav != NULL) {
+    for(trav = head; *trav != NULL;) {
         if((*trav)->data == elem) {
             temp = *trav;
-            
+            *trav = temp->link;
+        } else {
+            trav = &(*trav)->link;
         }
     }
 }
@@ -109,6 +111,7 @@ int main(void)
   insertFirst(&head, 14);
   insertFirst(&head, 13);
   insertFirst(&head, 12);
+  insertFirst(&head, 69);
   insertLast(&head, 69);
   // insertAtPos(&head, 420, 4);
   insertSorted(&head, 42);
@@ -117,6 +120,8 @@ int main(void)
   deleteFirst(&head);
   displayList(head);
   deleteAtPos(&head, 3);
+  displayList(head);
+  deleteAllOccurences(&head, 69);
   displayList(head);
 
   printf("\n-------------* %d\n", search(head, 12312));
