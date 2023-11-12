@@ -1,0 +1,2 @@
+  deleteFirst(&head);
+  displayList(head);
