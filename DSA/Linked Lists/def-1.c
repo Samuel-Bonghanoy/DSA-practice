@@ -52,7 +52,14 @@ void insertSorted(LIST* head, int data) {
     }
 }
 
-void insertAtPos(LIST* head, int data, int index);
+void insertAtPos(LIST* head, int data, int index) {
+    LIST *trav, temp;
+
+    temp = (LIST)malloc(sizeof(struct node));
+    if(temp != NULL) {
+        
+    }
+}
 
 void deleteFirst(LIST* head);
 
