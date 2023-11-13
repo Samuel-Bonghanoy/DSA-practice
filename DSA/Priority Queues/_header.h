@@ -9,8 +9,6 @@
 #define DNE -100
 
 // * TYPE DEFINITIONS HERE
-
- 
 typedef struct {
 	int heap[MAX];
 	int lastIndex;

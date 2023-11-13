@@ -107,12 +107,12 @@ void deleteAllOccurences(LIST *head, int elem) {
 int main(void)
 {
   LIST head = NULL;
-  insertFirst(&head, 16);
-  insertFirst(&head, 14);
-  insertFirst(&head, 13);
-  insertFirst(&head, 12);
-  insertFirst(&head, 69);
-  insertLast(&head, 69);
+  insertSorted(&head, 16);
+  insertSorted(&head, 14);
+  insertSorted(&head, 13);
+  insertSorted(&head, 12);
+  insertSorted(&head, 69);
+  insertSorted(&head, 69);
   // insertAtPos(&head, 420, 4);
   insertSorted(&head, 42);
   insertSorted(&head, 15);
