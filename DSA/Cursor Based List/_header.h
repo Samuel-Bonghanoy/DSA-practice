@@ -1,32 +1,37 @@
 #ifndef DATASTRUCTURE_IMPLEMENTATIONNAME
 #define DATASTRUCTURE_IMPLEMENTATIONNAME
+#include <stdio.h>
+#include <stdlib.h>
 
 // * MACROS HERE
 #define MAX 10
 
 // * TYPE DEFINITIONS HERE
-typedef enum boolean{FALSE, TRUE}BOOLEAN;
- 
+typedef int LIST;
 typedef struct node{
-	int data;
-	struct node *link;
-}*LIST;
+	char data;
+	int link;
+}Node;
+
+typedef struct {
+	Node *nodes;
+	LIST avail;
+}VirtualHeap;
 
 // * OPERATIONS HERE
-void displayList(LIST head);
+#define MAX 10
 
-void insertFirst(LIST* head, int data);
+VirtualHeap init();
 
-void insertLast(LIST* head, int data);
+void displayList(VirtualHeap VH, LIST L);
 
-void insertSorted(LIST* head, int data);
+int alloc(VirtualHeap* VH);
+void insertFirst(VirtualHeap *VH, LIST *L, char elem);
+void dealloc(VirtualHeap *VH, LIST *L, int index);
 
-void insertAtPos(LIST* head, int data, int index);
+void insertRear(VirtualHeap *VH, LIST *L, char elem);
 
-void deleteFirst(LIST* head);
-
-void deleteAtPos(LIST* head, int pos) ;
-
-int search(LIST head, int data);
+void insertSorted(VirtualHeap *VH, LIST *L, char elem);
+  
 
 #endif
