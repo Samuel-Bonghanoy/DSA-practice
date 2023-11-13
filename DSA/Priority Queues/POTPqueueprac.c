@@ -118,8 +118,8 @@ void heapify2(pQueue *q) {
 
 void heapify3(pQueue *q) {
   int origIndex = q->lastIndex;
-  
-  for(q->lastIndex = -1; q->lastIndex <= origIndex;) {
+
+  for(q->lastIndex = -1; q->lastIndex < origIndex;) {
     Insert(q->heap[q->lastIndex + 1], q);
   }
 }
