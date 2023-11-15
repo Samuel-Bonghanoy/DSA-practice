@@ -109,11 +109,11 @@ void heapsort(int *arr, int size) {
 
 void heapify2(pQueue *q) {
   int index;
-  for(index = q->lastIndex; (index-1)/2 != 0; index -= 2){
-    // printf("------------%d\n", (index-1)/2);
-    Heapify(q, (index-1)/2);
+  for(index = (q->lastIndex-1)/2; index >= 0; index--){
+    // printf("------------%d\n", index );
+    Heapify(q, index);
   }
-  Heapify(q, 0);
+  
 }
 
 void heapify3(pQueue *q) {
