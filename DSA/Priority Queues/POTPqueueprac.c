@@ -8,15 +8,15 @@ void swap(int *a, int *b) {
 }
 
 void Heapify(pQueue *q, int index) {
-  int left = LeftChild(index);
-  int right = RightChild(index);
-  int smallest = index;
+  int left = (index  * 2) + 1 ;
+  int right = (index * 2) + 2;
+  int smallest  = index;
 
-  if(left <= q->lastIndex && q->heap[left] < q->heap[right]) {
+  if(left <= q->lastIndex && q->heap[left] < q->heap[smallest]){
     smallest = left;
   }
 
-  if(right <= q->lastIndex && q->heap[right] < q->heap[smallest]) {
+  if(right <= q->lastIndex && q->heap[right] < q->heap[smallest]){
     smallest = right;
   }
 
@@ -27,6 +27,7 @@ void Heapify(pQueue *q, int index) {
     Heapify(q, smallest);
   }
 }
+
 
 
 void Insert(int elem, pQueue *q){
