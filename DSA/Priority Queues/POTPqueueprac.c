@@ -28,14 +28,12 @@ void Heapify(pQueue *q, int index) {
   }
 }
 
-
-
 void Insert(int elem, pQueue *q){
   int index, temp;
   q->heap[++q->lastIndex] = elem;
 
-  for(index = q->lastIndex; elem < q->heap[(index-1)/2]; index = (index-1)/2){
-    int temp = q->heap[index];
+  for(index = q->lastIndex; elem < q->heap[(index-1)/2] ;index = (index-1)/2){
+    temp = q->heap[index];
     q->heap[index] = q->heap[(index-1)/2];
     q->heap[(index-1)/2] = temp;
   }
@@ -67,7 +65,7 @@ int SmallestChild(pQueue q, int index) {
   int left = LeftChild(index);
   int right = RightChild(index);
 
-  return left > right ? left : right;
+  return left < right ? left : right;
 }
 
 int DeleteMin(pQueue *q) {
@@ -96,10 +94,9 @@ void MakeNull(pQueue *q){
 void heapsort(int *arr, int size) {
   int x;
   pQueue q;
-  Initialize(&q);
 
   for(x = 0; x < size; x++) {
-    Insert(arr[x], &q);
+    Insert(&q, arr[x]);
   }
 
   for(x = 0; x < size; x++) {
@@ -110,8 +107,7 @@ void heapsort(int *arr, int size) {
 
 void heapify2(pQueue *q) {
   int index;
-  for(index = (q->lastIndex-1)/2; index >= 0; index--){
-    // printf("------------%d\n", index );
+  for(index = (q->lastIndex +1)/2; index >= 0; index--){
     Heapify(q, index);
   }
   
