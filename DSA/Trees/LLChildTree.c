@@ -5,25 +5,31 @@ void Display(TREE T) {
    int x;
    Nodetype trav;
    for(x = 0; x < MAX; x++){
-        printf("[%d] ->", x);
-        if(T.Header[x] == NULL) {
-            printf(" NULL");
-        }
+    printf("[%d] => ", x);
 
-        for(trav = T.Header[x]; trav != NULL; trav = trav->link){
-            printf(" %d ->",  trav->key);
-        } 
-        printf("\n");
+    if(T.Header[x] == NULL) {
+        printf("NULL");
+    }
+
+    for(trav = T.Header[x]; trav != NULL; trav = trav->link){
+        printf("[%d] => ", trav->key);
+    }
+
+    printf("\n");
    }
+   
 }
 
 void Children(node N, TREE T) {
+    Nodetype trav;
     if(N >= 0 && N < MAX) {
-        Nodetype trav;
         printf("[%d] => ", N);
+        if(T.Header[N] == NULL) printf("NULL");
+
         for(trav = T.Header[N]; trav != NULL; trav = trav->link){
-        printf("%d->", trav->key);
+           printf("[%d] => ", trav->key);
         }
+        printf("\n");
     }
     
 }
@@ -31,11 +37,14 @@ void Children(node N, TREE T) {
 node Parent(int N, TREE T){
     int x, retVal = -1;
     Nodetype trav;
-    for(x = 0; x < MAX; x++) {
+
+    for(x = 0; x < MAX && retVal == -1; x++){
         for(trav = T.Header[x]; trav != NULL && trav->key != N; trav = trav->link){}
+
+        if(trav != NULL) retVal = 1;
     }
 
-    return trav == NULL ? retVal : x;
+    return trav == NULL ? retVal : x -1;
 }
 
 node Leftmost_Child(node N, TREE T) {
@@ -112,7 +121,8 @@ int main(void)
     Insert(9, &T, 2);
     Insert(8, &T, 3);
     Display(T);
-    printf("AFTER MAKENULL ------------\n");
-    MakeNULL(&T);
-    Display(T);
+    printf("%d PARENT", Parent(6, T));
+    // printf("AFTER MAKENULL ------------\n");
+    // MakeNULL(&T);
+    // Display(T);
 }
