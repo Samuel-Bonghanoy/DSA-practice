@@ -1,32 +1,30 @@
 #ifndef DATASTRUCTURE_IMPLEMENTATIONNAME
 #define DATASTRUCTURE_IMPLEMENTATIONNAME
+#include <stdio.h>
 
 // * MACROS HERE
 #define MAX 10
 
 // * TYPE DEFINITIONS HERE
-typedef enum boolean{FALSE, TRUE}BOOLEAN;
+typedef enum boolean{FALSE, TRUE} Boolean;
  
 typedef struct node{
 	int data;
-	struct node *link;
-}*LIST;
+	struct node *left;
+	struct node *right;
+}*BSTPtr;
 
-// * OPERATIONS HERE
-void displayList(LIST head);
+typedef int node;
 
-void insertFirst(LIST* head, int data);
+void Initialize(BSTPtr *B);
+void Preorder(BSTPtr B);
+void Postorder(BSTPtr B);
+void Inorder(BSTPtr B);
+void Insert(BSTPtr *B, node N);
+void Delete(BSTPtr *B, node N);
+Boolean Member(BSTPtr B, node N);
+node Min(BSTPtr B);
+node Max(BSTPtr B);
 
-void insertLast(LIST* head, int data);
-
-void insertSorted(LIST* head, int data);
-
-void insertAtPos(LIST* head, int data, int index);
-
-void deleteFirst(LIST* head);
-
-void deleteAtPos(LIST* head, int pos) ;
-
-int search(LIST head, int data);
 
 #endif
