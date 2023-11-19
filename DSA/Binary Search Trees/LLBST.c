@@ -60,12 +60,15 @@ void Delete(BSTPtr *B, node N) {
 
      if ((*trav)->data == N) {
         for (temp = *trav; temp->left != NULL; temp = temp->left, (*trav)->data = temp->data, trav = &(*trav)->left) {}
+
         if ((*trav)->right != NULL || temp->left == NULL) {
             temp = *trav;
             *trav = (*trav)->right;
             free(temp);
         } 
     }
+
+  
 }
 
 Boolean Member(BSTPtr B, node N) {

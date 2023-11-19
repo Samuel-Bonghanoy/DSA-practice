@@ -1,6 +1,7 @@
 #ifndef DATASTRUCTURE_IMPLEMENTATIONNAME
 #define DATASTRUCTURE_IMPLEMENTATIONNAME
 #include <stdio.h>
+#include <stdlib.h>
 
 // * MACROS HERE
 #define MAX 10
