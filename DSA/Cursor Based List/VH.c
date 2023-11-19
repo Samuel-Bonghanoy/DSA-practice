@@ -20,7 +20,7 @@ void displayList(VirtualHeap VH, LIST L) {
     int trav; 
 
     for(trav = L; trav != -1; trav = VH.nodes[trav].link){
-        printf("[%d]=> ", VH.nodes[trav].data);
+        printf("[%c]=> ", VH.nodes[trav].data);
     }
     printf("\n");
 }
@@ -29,8 +29,8 @@ int alloc(VirtualHeap* VH) {
     int retval = -1;
 
     if(VH->avail != -1) {
-        retval = VH->avail;
-        VH->avail = VH->nodes[VH->avail].link;
+      retval = VH->avail;
+      VH->avail = VH->nodes[VH->avail].link;
     }
 
     return retval;
@@ -46,25 +46,25 @@ void insertFirst(VirtualHeap *VH, LIST *L, char elem) {
    }
 }
 void dealloc(VirtualHeap *VH, LIST *L, int index) {
-    int x, trav;
+    // int x, trav;
 
-    for(trav = *L, x = 0; trav != -1 && x > index; trav = VH->nodes[trav].link, x--){}
+    // for(x = 0, trav = *L; trav != -1 && x < index; trav = VH->nodes[trav].link, x++){}
 
-   VH->nodes[trav].link = VH->nodes[index].link;
-   VH->nodes[index].link = VH->avail;
-   VH->avail = index; 
+    // VH->nodes[trav].link = VH->nodes[index].link;
+    VH->nodes[index].link = VH->avail;
+    VH->avail = index;
 }
 
 void insertRear(VirtualHeap *VH, LIST *L, char elem) {
-    int index = alloc(VH), trav;
+   int index = alloc(VH), trav;
 
-    if(index != -1) {
-        for(trav = *L; VH->nodes[trav].link != -1; trav = VH->nodes[trav].link){}
+   if(index != -1) {
+    for(trav = *L; trav != -1; trav = VH->nodes[trav].link){}
 
-        VH->nodes[index].data = elem;
-        VH->nodes[index].link = VH->nodes[trav].link;
-        VH->nodes[trav].link = index;
-    }
+    VH->nodes[index].data = elem;
+    VH->nodes[index].link = VH->nodes[trav].link;
+    VH->nodes[trav].link = index;
+   }
 }
 
 void insertSorted(VirtualHeap *VH, LIST *L, char elem) {
@@ -72,14 +72,14 @@ void insertSorted(VirtualHeap *VH, LIST *L, char elem) {
 
     if(index != -1) {
         VH->nodes[index].data = elem;
-        for(trav = *L; trav != -1 &&  VH->nodes[VH->nodes[trav].link].data < elem; trav = VH->nodes[trav].link){}
+        for(trav = *L; trav != -1 && elem > VH->nodes[VH->nodes[trav].link].data; trav = VH->nodes[trav].link){}
 
         if(trav == *L) {
-            VH->nodes[index].link = *L;
-            *L = index;
+          VH->nodes[trav].link = *L;
+          *L = trav;
         } else {
-            VH->nodes[index].link = VH->nodes[trav].link;
-            VH->nodes[trav].link = index;
+          VH->nodes[index].link = VH->nodes[trav].link;
+          VH->nodes[trav].link = index;
         }
     }
 }
@@ -110,14 +110,15 @@ int main()
 //   // insertRear(&VH, &L, 'a');
 //   // displayList(VH, L);
 //   // puts("");
-  insertRear(&VH, &L, 'f');
-  insertRear(&VH, &L, 'f');
-  insertRear(&VH, &L, 'f');
-  insertRear(&VH, &L, 'f');
+  // insertRear(&VH, &L, 'f'); 
+  // insertRear(&VH, &L, 'f');
+  // insertRear(&VH, &L, 'f');
+  // insertRear(&VH, &L, 'f');
 //   displayList(VH, L);
 //   puts("");
-//   dealloc(&VH,&L, 2);
+  dealloc(&VH,&L, 2);
   insertSorted(&VH, &L, 'e');
+  insertRear(&VH, &L, 'f');
   displayList(VH, L);
   // printf("%d", L);
   // puts("");
