@@ -31,10 +31,42 @@ void Inorder(BSTPtr B) {
 
     
 void Insert(BSTPtr *B, node N) {
-    
+    BSTPtr *trav, temp = (BSTPtr)malloc(sizeof(struct node));
+
+    for(trav = B; *trav != NULL;) {
+        if(N > (*trav)->data){
+            trav = &(*trav)->right;
+        } else {
+            trav = &(*trav)->left;
+        }
+    }
+
+    temp->data = N;
+    temp->left = NULL;
+    temp->right = NULL;
+    *trav = temp;
 }
 
-void Delete(BSTPtr *B, node N);
+void Delete(BSTPtr *B, node N) {
+    BSTPtr *trav, temp;
+
+    for(trav = B; *trav != NULL && (*trav)->data != N;){
+        if(N > (*trav)->data){
+            trav = &(*trav)->right;
+        } else {
+            trav = &(*trav)->left;
+        }
+    }
+
+     if ((*trav)->data == N) {
+        for (temp = *trav; temp->left != NULL; temp = temp->left, (*trav)->data = temp->data, trav = &(*trav)->left) {}
+        if ((*trav)->right != NULL || temp->left == NULL) {
+            temp = *trav;
+            *trav = (*trav)->right;
+            free(temp);
+        } 
+    }
+}
 
 Boolean Member(BSTPtr B, node N) {
     for(;B != NULL && B->data != N;){
@@ -48,5 +80,14 @@ Boolean Member(BSTPtr B, node N) {
     return B == NULL ? FALSE : TRUE;
 }
     
-node Min(BSTPtr B);
-node Max(BSTPtr B);
+node Min(BSTPtr B) {
+    int retval = B->data;
+    for(;B != NULL; B = B->left){} 
+    return retval == B->data ? retval : B->data;
+}
+
+node Max(BSTPtr B){
+    int retval = B->data;
+    for(;B != NULL; B = B->right){}
+    return retval == B->data ? retval : B->data;
+}
