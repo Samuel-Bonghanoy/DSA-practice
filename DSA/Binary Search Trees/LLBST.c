@@ -1,6 +1,39 @@
 #include "_header.h"
 
 // * FUNCTION DEFINITIONS HERE
+void printSpaces(int spaces) {
+    for (int i = 0; i < spaces; i++) {
+        printf(" ");
+    }
+}
+
+// Function to display a BST in tree format
+void displayTree(BSTPtr B, int level) {
+    if (B == NULL) {
+        return;
+    }
+
+    // Define the spaces between nodes for formatting
+    int spaces = 5;
+
+    // Increase the spaces for each level to create a tree-like structure
+    spaces += level * 2;
+
+    // Recursively display the right subtree
+    displayTree(B->right, level + 1);
+
+    // Print spaces for formatting
+    for (int i = 0; i < spaces; i++) {
+        printf(" ");
+    }
+
+    // Print the current node
+    printf("%d\n", B->data);
+
+    // Recursively display the left subtree
+    displayTree(B->left, level + 1);
+}
+
 void Initialize(BSTPtr *B) {
     *B = NULL;
 }
@@ -67,23 +100,10 @@ void Delete(BSTPtr *B, node N) {
             free(temp);
         } 
     }
-
-    if((*trav)->data == N) {
-        for(temp = *trav; temp->left != NULL; temp = temp->left, (*trav)->data = temp->data, trav = &(*trav)->left){}
-
-        if((*trav)->right != NULL || temp->left == NULL){
-            temp = *trav;
-            *trav = (*trav)->right;
-            free(temp);
-        }
-    }
-
-  
 }
 
 Boolean Member(BSTPtr B, node N) {
     for(;B != NULL && B->data != N;){
-    printf("\nHEREEEEEEE %d", B->data);
         if(N > B->data){
             B = B->right;
         } else {
@@ -127,7 +147,7 @@ int main()
     // printf("%d", myBST->data);
 
     //Delete from my BST
-    // Delete(&myBST, 19);
+    // Delete(&myBST, 15);
 
     //Display updated BST
     printf("\n");
@@ -138,9 +158,11 @@ int main()
     Inorder(myBST);
 
     // //Checking to see if my Member function worked
-    // printf("\n[%d] => %s", Member(myBST, 19), Member(myBST, 19) == TRUE ? "True" : "False");
+    printf("\n[%d] => %s", Member(myBST, 19), Member(myBST, 23) == TRUE ? "True" : "False");
 
     // //Finding out what are the highest and lowest values
-    printf("\nLOWEST: [%d]...\tHIGHEST:[%d]...", Min(myBST), Max(myBST));
+    printf("\nLOWEST: [%d]...\tHIGHEST:[%d]...\n", Min(myBST), Max(myBST));
+
+    displayTree(myBST, 0);
     return 0;
 }
