@@ -47,25 +47,22 @@ void Insert(BSTPtr *B, node N) {
     *trav = temp;
 }
 
-void Delete(BSTPtr *B, node N) {
-    BSTPtr *trav, temp;
-
-    for(trav = B; *trav != NULL && (*trav)->data != N;){
-        if(N > (*trav)->data){
-            trav = &(*trav)->right;
-        } else {
-            trav = &(*trav)->left;
-        }
-    }
-
-     if ((*trav)->data == N) {
-        for (temp = *trav; temp->left != NULL; temp = temp->left, (*trav)->data = temp->data, trav = &(*trav)->left) {}
-
-        if ((*trav)->right != NULL || temp->left == NULL) {
+void Delete(BSTPtr *B, int node) {
+    for (; *B != NULL && (*B)->data != node; B = (*B)->data > node ? &(*B)->left : &(*B)->right) {}
+    if (*B != NULL) {
+        BSTPtr *trav, temp;
+        if ((*B)->right != NULL) {
+            for (trav = &(*B)->right; (*trav)->left != NULL; trav = &(*trav)->left) {}
             temp = *trav;
+            (*B)->data = temp->data;
             *trav = (*trav)->right;
-            free(temp);
-        } 
+        } else {
+            temp = *B;
+            *B = (*B)->left;
+        }
+        free(temp);
+    } else {
+        printf("\nNode does not exist\n");
     }
 }
 
@@ -114,7 +111,7 @@ int main()
     // printf("%d", myBST->data);
 
     //Delete from my BST
-    // Delete(&myBST, 15);
+    Delete(&myBST, 15);
 
     //Display updated BST
     printf("\nPREORDER\n");

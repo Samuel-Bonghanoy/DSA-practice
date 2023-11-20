@@ -40,7 +40,7 @@ int main()
     Preorder(myBST);
 
     //Delete from my BST
-    Delete(&myBST, 19);
+    Delete(&myBST, 15);
 
     //Display updated BST
     printf("\n");
@@ -122,8 +122,6 @@ void Delete(BSTPtr *B, node N) {
         }
     }
 
-    //printf("[%d]", (*trav)->key);
-
     if ((*trav)->key == N) {
         for (trav2 = *trav; trav2->left != NULL; trav2 = trav2->left, (*trav)->key = trav2->key, trav = &(*trav)->left) {}
         if ((*trav)->right != NULL || trav2->left == NULL) {
@@ -133,6 +131,7 @@ void Delete(BSTPtr *B, node N) {
         } 
     }
 }
+
 
 Boolean Member(BSTPtr B, node N) {
     for (; B != NULL && B->key != N; ) {
