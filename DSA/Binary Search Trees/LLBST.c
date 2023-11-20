@@ -1,39 +1,6 @@
 #include "_header.h"
 
 // * FUNCTION DEFINITIONS HERE
-void printSpaces(int spaces) {
-    for (int i = 0; i < spaces; i++) {
-        printf(" ");
-    }
-}
-
-// Function to display a BST in tree format
-void displayTree(BSTPtr B, int level) {
-    if (B == NULL) {
-        return;
-    }
-
-    // Define the spaces between nodes for formatting
-    int spaces = 5;
-
-    // Increase the spaces for each level to create a tree-like structure
-    spaces += level * 2;
-
-    // Recursively display the right subtree
-    displayTree(B->right, level + 1);
-
-    // Print spaces for formatting
-    for (int i = 0; i < spaces; i++) {
-        printf(" ");
-    }
-
-    // Print the current node
-    printf("%d\n", B->data);
-
-    // Recursively display the left subtree
-    displayTree(B->left, level + 1);
-}
-
 void Initialize(BSTPtr *B) {
     *B = NULL;
 }
@@ -55,11 +22,11 @@ void Postorder(BSTPtr B) {
 }
 
 void Inorder(BSTPtr B) {
-    if(B->left != NULL) Postorder(B->left);
+    if(B->left != NULL) Inorder(B->left);
 
     printf("%d ", B->data);
 
-    if(B->right != NULL) Postorder(B->right);
+    if(B->right != NULL) Inorder(B->right);
 }
 
     
@@ -150,11 +117,11 @@ int main()
     // Delete(&myBST, 15);
 
     //Display updated BST
-    printf("\n");
+    printf("\nPREORDER\n");
     Preorder(myBST);
-    printf("\n");
+    printf("\nPOSTORDER\n");
     Postorder(myBST);
-    printf("\n");
+    printf("\nINORDER\n");
     Inorder(myBST);
 
     // //Checking to see if my Member function worked
@@ -162,7 +129,5 @@ int main()
 
     // //Finding out what are the highest and lowest values
     printf("\nLOWEST: [%d]...\tHIGHEST:[%d]...\n", Min(myBST), Max(myBST));
-
-    displayTree(myBST, 0);
     return 0;
 }
