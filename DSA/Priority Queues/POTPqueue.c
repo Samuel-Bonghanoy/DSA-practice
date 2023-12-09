@@ -69,26 +69,6 @@ int SmallestChild(pQueue q, int index) {
 }
 
 int DeleteMin(pQueue *q) {
-    // int temp, index = 0, retVal = q->heap[index], isSmallest = 0;
-    // q->heap[index] = q->heap[q->lastIndex];
-    // q->heap[q->lastIndex--] = DNE;
-    // while(q->heap[index] > SmallestChild(*q, index) && (index * 2) - 1 <= q->lastIndex) {
-    //     int left = LeftChild(index), right = RightChild(index), temp = q->heap[index];
-
-    //     if(SmallestChild(*q, index) == left) {
-    //         q->heap[index] = q->heap[(index *2) - 1];
-    //         q->heap[(index * 2) - 1] = temp;
-    //         index = (index * 2) - 1;
-    //     }
-
-    //     if(SmallestChild(*q, index) == right) {
-    //         q->heap[index] = q->heap[(index*2) + 2];
-    //         q->heap[(index*2) + 2]= temp;
-    //         index = (index*2) + 2;
-    //     }
-    // }
-    // return retVal;
-
     int retval = q->heap[0];
     q->heap[0] = q->heap[q->lastIndex--];
     Heapify(q, 0);
@@ -110,11 +90,6 @@ void MakeNull(pQueue *q){
     }
 }
 
-//heap sort psuedo
-// turn an array into a heap
-// deletemin from your heap
-// store it in an array
-
 void heapsort(int *arr, int size) {
     pQueue q;
     Initialize(&q);
@@ -128,7 +103,7 @@ void heapsort(int *arr, int size) {
     }
 }
 
-void heapifyArr(int *arr, int size, int index) {
+void heapify(int *arr, int size, int index) {
     int smallest = index;
     int leftChild = 2 * index + 1;
     int rightChild = 2 * index + 2;
@@ -147,7 +122,7 @@ void heapifyArr(int *arr, int size, int index) {
     }
 }
 
-void heapsort2(int *arr, int size){
+void hea(int *arr, int size){
     int x;
     for (x = size / 2 - 1; x >= 0; x--) {
     heapify(arr, size, x);

@@ -8,22 +8,22 @@ void swap(int *a, int *b) {
 }
 
 void Heapify(pQueue *q, int index) {
-  int left = (index * 2) +1;
-  int right = left + 1;
-  int smallest = index;
+  int left = (index  * 2) + 1 ;
+  int right = (index * 2) + 2;
+  int smallest  = index;
 
-  if(left <= q->lastIndex && q->heap[left] < q->heap[smallest]) {
+  if(left <= q->lastIndex && q->heap[left] < q->heap[smallest]){
     smallest = left;
   }
 
-  if(right <= q->lastIndex && q->heap[right] < q->heap[smallest]) {
+  if(right <= q->lastIndex && q->heap[right] < q->heap[smallest]){
     smallest = right;
   }
 
   if(smallest != index) {
-    int temp = q->heap[smallest];
-    q->heap[smallest] = q->heap[index];
-    q->heap[index] = temp;
+    int temp = q->heap[index];
+    q->heap[index] = q->heap[smallest];
+    q->heap[smallest] = temp;
     Heapify(q, smallest);
   }
 }
@@ -32,15 +32,25 @@ void Insert(int elem, pQueue *q){
   int index, temp;
   q->heap[++q->lastIndex] = elem;
 
-  for(index = q->lastIndex; q->heap[(index -1)/2] > elem; index = (index - 1)/2){
-    int temp = q->heap[index];
-    q->heap[index] = q->heap[(index - 1)/2];
-    q->heap[(index - 1)/2] = temp;
+  for(index = q->lastIndex; elem < q->heap[(index-1)/2] ;index = (index-1)/2){
+    temp = q->heap[index];
+    q->heap[index] = q->heap[(index-1)/2];
+    q->heap[(index-1)/2] = temp;
   }
 }
 
 void Display(pQueue q){
-    
+    int x, y;
+    for(x = 0; x <= q.lastIndex; x++){
+       printf("[%d] => ", q.heap[x]);
+
+       if(LeftChild(x) <= q.lastIndex) {
+           printf("%d => ", q.heap[(x * 2) + 1]);
+           if(RightChild(x) <= q.lastIndex) printf("%d", q.heap[(x * 2) + 2]);       
+        }
+
+       printf("\n");
+    } 
 }
 
 int LeftChild(int index) {
@@ -67,18 +77,25 @@ int DeleteMin(pQueue *q) {
 
 
 void Initialize(pQueue *q) {
-  
+  int x;
+    for(x = 0; x < MAX; x++) {
+        q->heap[x] = DNE;
+    }
+  q->lastIndex = -1;
 }
 
 void MakeNull(pQueue *q){
-  
+  int x;
+    for(x = 0; x < MAX; x++) {
+        q->heap[x] = DNE;
+    }
 }
 
 void heapsort(int *arr, int size) {
   int x;
   pQueue q;
 
-  for(x = 0; x < size; x++){
+  for(x = 0; x < size; x++) {
     Insert(&q, arr[x]);
   }
 
@@ -89,11 +106,19 @@ void heapsort(int *arr, int size) {
 
 
 void heapifyHeap(pQueue *q) {
- 
+  int index;
+  for(index = (q->lastIndex +1)/2; index >= 0; index--){
+    Heapify(q, index);
+  }
+  
 }
 
 void insertHeapifyHeap(pQueue *q) {
- 
+  int origIndex = q->lastIndex;
+
+  for(q->lastIndex = -1; q->lastIndex < origIndex;) {
+    Insert(q->heap[q->lastIndex + 1], q);
+  }
 }
 
 

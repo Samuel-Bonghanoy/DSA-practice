@@ -11,10 +11,9 @@ void displayList(LIST head) {
 
 void insertFirst(LIST* head, int data) {
     LIST temp = (LIST)malloc(sizeof(struct node));
+
     if(temp != NULL) {
-        temp->data = data; 
-        temp->link = *head;
-        *head = temp;
+        
     }
 }
 
